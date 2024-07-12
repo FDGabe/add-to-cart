@@ -49,15 +49,28 @@ function clearInputFieldEl() {
 function appendItemToShoppingListEl(item) {
     let itemID = item[0]
     let itemValue = item[1]
-    
+    let isHoldingDelete;
+    let deleteTimer;
     let newEl = document.createElement("li")
     
     newEl.textContent = itemValue
     
-    newEl.addEventListener("dblclick", function() {
-        let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
+    newEl.addEventListener("mousedown", function() {
+        isHoldingDelete = true;
+        deleteTimer = setTimeout(() => {
+            let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
+            remove(exactLocationOfItemInDB)
+        }, 1500);
         
-        remove(exactLocationOfItemInDB)
+    })
+
+    window.addEventListener("mouseup", () => {
+        if (isHoldingDelete) {
+            if (deleteTimer){
+                clearTimeout(deleteTimer)
+            }
+            isHoldingDelete = false;
+        }
     })
     
     shoppingListEl.append(newEl)

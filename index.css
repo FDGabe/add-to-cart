@@ -70,3 +70,20 @@ ul li:hover {
     background-color: #7C9070;
     cursor: pointer;
 }
+
+ul li:active {
+    background-image: linear-gradient(90deg, #1A5319 0%, 
+    #1A5319 50%, #9CA777 50%, #9CA777 100%);
+    background-size: 200% 100%;
+    background-position: 100%;
+    animation: 1.5s confirmation;
+}
+
+@keyframes confirmation {
+    from {
+        background-position: 100%;
+    }
+    to {
+        background-position: 0%;
+    }
+}
