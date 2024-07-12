@@ -55,7 +55,7 @@ function appendItemToShoppingListEl(item) {
     
     newEl.textContent = itemValue
     
-    newEl.addEventListener("mousedown", function() {
+    newEl.addEventListener("touchstart", function() {
         isHoldingDelete = true;
         deleteTimer = setTimeout(() => {
             let exactLocationOfItemInDB = ref(database, `shoppingList/${itemID}`)
@@ -64,7 +64,7 @@ function appendItemToShoppingListEl(item) {
         
     })
 
-    window.addEventListener("mouseup", () => {
+    window.addEventListener("touchend", () => {
         if (isHoldingDelete) {
             if (deleteTimer){
                 clearTimeout(deleteTimer)
